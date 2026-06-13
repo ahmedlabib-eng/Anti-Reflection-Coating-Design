@@ -68,7 +68,7 @@ This project designs and analyzes a **quarter-wave anti-reflection coating (ARC)
 | S11 at 10 GHz (CST) | ≈ −72 dB |
 | 20 dB return-loss bandwidth | 6.57 GHz (6.73 – 13.30 GHz) |
 
-![Single-layer S11 vs frequency with 20 dB bandwidth markers](figures/S11_single_layer.png)
+![Single-layer S11 vs frequency with 20 dB bandwidth markers](figures/S11_single layer.png)
 
 *S11 magnitude for the single-layer ARC. Markers at (6.73 GHz, −20 dB) and (13.3 GHz, −20 dB) define the 20 dB return-loss bandwidth, with a deep null of ≈ −72 dB at the 10 GHz design frequency.*
 
@@ -83,7 +83,7 @@ This project designs and analyzes a **quarter-wave anti-reflection coating (ARC)
 
 **Bandwidth improvement:** 6.57 GHz → 9.85 GHz (+50%)
 
-![Two-layer S11 vs frequency with 20 dB bandwidth markers](figures/S11_double_layer.png)
+![Two-layer S11 vs frequency with 20 dB bandwidth markers](figures/S11_double layer.png)
 
 *S11 magnitude for the two-layer binomial ARC. Markers at (5.08 GHz, −20 dB) and (14.93 GHz, −20 dB) give a 20 dB bandwidth of ≈ 9.85 GHz — a ~50% improvement over the single-layer design.*
 
