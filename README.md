@@ -143,7 +143,7 @@ A higher substrate εr produces a larger impedance mismatch, which makes the qua
 | Member | Contribution |
 |---|---|
 | Anas Mohamed | Analytical derivation (Task 7) |
-| Radwa Ahmed | |Γ| vs frequency analysis & bandwidth (Tasks 8–9) |
+| Radwa Ahmed | Γ vs frequency analysis & bandwidth (Tasks 8–9) |
 | Amin Mohamed | MATLAB verification |
 | Ahmed Hassan | CST single-layer simulation & overlay (Task 10), Extension analysis |
 | Ahmed Amir | Two-layer design & CST verification (Task 11) |
