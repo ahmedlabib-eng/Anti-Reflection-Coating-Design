@@ -36,18 +36,18 @@ This project designs and analyzes a **quarter-wave anti-reflection coating (ARC)
 .
 ├── README.md
 ├── report/
-│   └── Group6_ARC_Report.pdf          # Final written report (max 20 pages)
+│   └── Fields_and_waves_Report___Group_6___Project_1B.pdf   # Final written report (max 20 pages)
 ├── matlab/
-│   ├── arc_single_layer.m              # Tasks 8, 9 — |Γ| vs frequency, 20dB BW
-│   ├── arc_two_layer.m                 # Task 11 — binomial two-layer design
-│   └── arc_sensitivity.m               # Extension — thickness sensitivity sweep
+│   └── analytical_matlab.m             # Tasks 8, 9, 11, Extension — analysis & plots
 ├── cst/
-│   ├── single_layer_ARC.cst            # Single-layer CST project file
-│   ├── two_layer_ARC.cst               # Two-layer CST project file
-│   └── screenshots/                    # Annotated CST screenshots (Group 6 label)
+│   ├── Task10.cst                      # Single-layer CST project file
+│   ├── task_11.cst                     # Two-layer CST project file
+│   └── extension_task/                 # Annotated CST screenshots (Group 6 label)
 ├── figures/
-│   ├── single_layer_diagram.tex        # TikZ structure diagram
-│   └── two_layer_diagram.tex           # TikZ structure diagram
+│   ├── S11_single_layer.png            # Single-layer S11, 20dB BW markers
+│   ├── S11_double_layer.png            # Two-layer S11, 20dB BW markers
+│   ├── S11_single_sweep.png            # ±10% thickness sensitivity sweep
+│   └── error.png                       # Critical thickness error (RL = 15 dB)
 └── presentation/
     └── Group6_ARC_Presentation.pptx    # 5-slide summary presentation
 ```
@@ -66,18 +66,42 @@ This project designs and analyzes a **quarter-wave anti-reflection coating (ARC)
 | Coating εr | 1.50 |
 | Coating thickness | 6.12 mm |
 | S11 at 10 GHz (CST) | ≈ −72 dB |
-| 20 dB return-loss bandwidth | 6.56 GHz (6.72 – 13.28 GHz) |
+| 20 dB return-loss bandwidth | 6.57 GHz (6.73 – 13.30 GHz) |
+
+![Single-layer S11 vs frequency with 20 dB bandwidth markers](figures/S11_single_layer.png)
+
+*S11 magnitude for the single-layer ARC. Markers at (6.73 GHz, −20 dB) and (13.3 GHz, −20 dB) define the 20 dB return-loss bandwidth, with a deep null of ≈ −72 dB at the 10 GHz design frequency.*
+
+---
 
 ### Two-Layer Binomial Design (Task 11)
 
 | Layer | εr | Impedance | Thickness |
 |---|---|---|---|
 | Layer 1 (air side) | 1.225 | 340.7 Ω | 6.78 mm |
-| Layer 2 (glass side) | 1.800 | 281.0 Ω | 5.59 mm |
+| Layer 2 (glass side) | 1.84 | 281.0 Ω | 5.53 mm |
 
-**Bandwidth improvement:** 6.56 GHz → ~9.85 GHz (+50%)
+**Bandwidth improvement:** 6.57 GHz → 9.85 GHz (+50%)
+
+![Two-layer S11 vs frequency with 20 dB bandwidth markers](figures/S11_double_layer.png)
+
+*S11 magnitude for the two-layer binomial ARC. Markers at (5.08 GHz, −20 dB) and (14.93 GHz, −20 dB) give a 20 dB bandwidth of ≈ 9.85 GHz — a ~50% improvement over the single-layer design.*
+
+---
 
 ### Extension — Thickness Sensitivity
+
+**Part 1 — ±10% thickness error**
+
+![±10% thickness sensitivity sweep](figures/S11_single_sweep.png)
+
+*S11 for d = 5.51 mm (−10%), d = 6.12 mm (nominal), and d = 6.73 mm (+10%). Both ±10% cases shift the matching null away from 10 GHz, reducing the return loss at 10 GHz from ~74 dB (nominal) to ~30 dB — still well above the 20 dB threshold.*
+
+**Part 2 — Critical error for RL = 15 dB**
+
+![Critical thickness error analysis](figures/error.png)
+
+*Sweeping the coating thickness further shows that S11 at 10 GHz reaches −15 dB (RL = 15 dB) at d ≈ 10.35 mm (+69%) and d ≈ 1.9 mm (−69%). The single-layer design therefore tolerates a thickness error of approximately ±69% before falling below the 15 dB return-loss specification.*
 
 | Thickness error | Return loss at 10 GHz |
 |---|---|
@@ -85,12 +109,14 @@ This project designs and analyzes a **quarter-wave anti-reflection coating (ARC)
 | ±10% | ~30 dB |
 | ±69% | ~15 dB (failure threshold) |
 
+---
+
 ### Cross-Group Comparison (vs Group 9 — Alumina, εr = 9.8)
 
 | Parameter | Group 6 (Glass) | Group 9 (Alumina) |
 |---|---|---|
 | Impedance ratio η₀/ηs | 1.50 | 3.13 |
-| 20 dB Bandwidth | 6.4 GHz | 2.2 GHz |
+| 20 dB Bandwidth | 6.57 GHz | 2.2 GHz |
 
 A higher substrate εr produces a larger impedance mismatch, which makes the quarter-wave transformer more frequency-sensitive — hence Group 9's narrower bandwidth.
 
@@ -99,17 +125,16 @@ A higher substrate εr produces a larger impedance mismatch, which makes the qua
 ## 🛠️ How to Reproduce
 
 ### MATLAB
-1. Open `matlab/arc_single_layer.m` in MATLAB.
-2. Run the script — it prints impedance values, the 20 dB bandwidth, and plots |Γ| / Return Loss vs frequency.
-3. Run `arc_two_layer.m` for the two-layer comparison.
-4. Run `arc_sensitivity.m` for the thickness sensitivity analysis.
+1. Open `matlab/analytical_matlab.m` in MATLAB.
+2. Run the script — it prints impedance values, the 20 dB bandwidth, and plots |Γ| / Return Loss vs frequency for the single-layer design (Tasks 8–9), the two-layer design (Task 11), and the thickness sensitivity analysis (Extension).
 
 ### CST Studio Suite
-1. Open `cst/single_layer_ARC.cst` (CST Studio Suite 2025 recommended).
+1. Open `cst/Task10.cst` (CST Studio Suite 2025 recommended).
 2. Structure: Air background / ARC coating brick (εr=1.5, 6.12 mm) / Glass brick (εr=2.25).
 3. Boundary conditions: Electric (X), Magnetic (Y), Open (Z) — enforces the infinite plane-wave condition.
 4. Run the Time Domain solver over 5–15 GHz and inspect **Results → S-Parameters → S1,1**.
-5. Repeat with `two_layer_ARC.cst` for the binomial design.
+5. Repeat with `cst/task_11.cst` for the binomial two-layer design.
+6. For the extension task, use a Parameter Sweep on the coating thickness (see `cst/extension_task/`).
 
 ---
 
@@ -119,11 +144,9 @@ A higher substrate εr produces a larger impedance mismatch, which makes the qua
 |---|---|
 | Anas Mohamed | Analytical derivation (Task 7) |
 | Radwa Ahmed | |Γ| vs frequency analysis & bandwidth (Tasks 8–9) |
-| Amin Mohamed | CST single-layer simulation & overlay (Task 10) |
-| Ahmed Hassan | Two-layer design & CST verification (Task 11) |
-| Ahmed Amir | Extension analysis, cross-group comparison, report assembly |
-
-*(Edit names/roles to match your actual contribution statement.)*
+| Amin Mohamed | MATLAB verification |
+| Ahmed Hassan | CST single-layer simulation & overlay (Task 10), Extension analysis |
+| Ahmed Amir | Two-layer design & CST verification (Task 11) |
 
 ---
 
